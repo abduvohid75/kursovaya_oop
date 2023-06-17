@@ -29,6 +29,13 @@ class Vacancy:
         self.experience = experience
         self.employment = employment
 
+    def __gt__(self, other):
+        if isinstance(other, (int, Vacancy)):
+            raise TypeError("not int")
+
+        sc = other if isinstance(other, int) else other.salary_from
+        return self.salary_from > sc
+
     @staticmethod
     def sorted_by_salary(not_sorted_vacancies: list):
         count_of_vacancies = len(not_sorted_vacancies)
@@ -39,6 +46,7 @@ class Vacancy:
         while len(sorted_vacancies) != count_of_vacancies:
 
             for vacancy in not_sorted_vacancies:
+
                 if vacancy.salary_from >= highest_salary_from_value:
                     highest_salary_from_value = vacancy.salary_from
                     highest_salary_from_sample = vacancy
