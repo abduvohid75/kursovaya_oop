@@ -1,9 +1,21 @@
-#import classes_api
-
-
+# import classes_api
 
 class Vacancy:
-    def __init__(self, name, url, salary_from, salary_to, requirement, responsibility, professional_roles, experience, employment):
+
+    def __init__(self, name, url, salary_from, salary_to, requirement, responsibility, professional_roles, experience,
+                 employment):
+        """
+
+        :param name: name vacancy
+        :param url:  adress vacancy
+        :param salary_from: oklad nachalo c ....
+        :param salary_to: oklad do ....
+        :param requirement:  obrazovanie
+        :param responsibility: obzannosti
+        :param professional_roles: doljnost
+        :param experience: opit raboti
+        :param employment: zanyatist
+        """
 
         self.name = name
         self.url = url
@@ -12,7 +24,7 @@ class Vacancy:
         self.currency = 'rub.'
         self.salary = f"{self.salary_from} - {self.salary_to}"
         self.requirement = requirement
-        self.responsibility  = responsibility
+        self.responsibility = responsibility
         self.professional_roles = professional_roles
         self.experience = experience
         self.employment = employment
@@ -20,7 +32,7 @@ class Vacancy:
     @staticmethod
     def sorted_by_salary(not_sorted_vacancies: list):
         count_of_vacancies = len(not_sorted_vacancies)
-        sorted_vacancies =  []
+        sorted_vacancies = []
         highest_salary_from_value = 0
         highest_salary_from_sample = None
 
@@ -35,4 +47,4 @@ class Vacancy:
 
             highest_salary_from_value = 0
 
-        return  sorted_vacancies
+        return sorted_vacancies
