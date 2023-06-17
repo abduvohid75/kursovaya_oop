@@ -30,6 +30,11 @@ class Vacancy:
         self.employment = employment
 
     def __gt__(self, other):
+        """
+
+        :param other: selary from = oklad c ...
+        :return: sort oklad
+        """
         if isinstance(other, (int, Vacancy)):
             raise TypeError("not int")
 
@@ -38,6 +43,10 @@ class Vacancy:
 
     @staticmethod
     def sorted_by_salary(not_sorted_vacancies: list):
+        """
+        :param not_sorted_vacancies: not sort list
+        :return:  sort list
+        """
         count_of_vacancies = len(not_sorted_vacancies)
         sorted_vacancies = []
         highest_salary_from_value = 0
