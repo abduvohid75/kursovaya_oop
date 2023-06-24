@@ -5,6 +5,12 @@ from abc import ABC, abstractmethod
 
 
 class Saver(ABC):
+
+    @staticmethod
+    @abstractmethod
+    def save_vacancies(objects):
+        pass
+
     @staticmethod
     @abstractmethod
     def add_vacancies(sorted_vacancies: list, top_vacancies: int):
@@ -12,7 +18,7 @@ class Saver(ABC):
 
     @staticmethod
     @abstractmethod
-    def get_vacancies_by_salary(salaty_from: int):
+    def get_vacancies_by_salary(salary_from: int):
         pass
 
     @staticmethod
@@ -26,6 +32,54 @@ class JSONSaver(Saver):
     Сохранение информации о вакансиях в файл
 
     """
+
+    @staticmethod
+    def save_vacancies_hh(objects):
+        """
+        Сохранение информации о вакансиях сайта HH в файл hh_jobs.json
+
+        """
+        file_write_jobs = 'hh_jobs.json'
+        with open(file_write_jobs, 'a', encoding="utf-8") as add_file:
+            if os.stat(file_write_jobs).st_size == 0:
+                json.dump(objects["items"], add_file, indent=4)
+                add_file.close()
+
+            else:
+                with open(file_write_jobs, encoding="utf-8") as json_file_read:
+                    content = json.load(json_file_read)
+                    json_file_read.close()
+                    for vacancy in objects["items"]:
+                        content.append(vacancy)
+
+                with open(file_write_jobs, "w", encoding="utf-8") as json_file_write:
+                    json.dump(content, json_file_write, indent=4)
+                    json_file_write.close()
+
+            print(f"LOADING: 50 %")
+
+    def save_vacancies_sj(objects):
+        """
+        Сохранение информации о вакансиях сайта SJ в файл sj_jobs.json
+        """
+        file_write_jobs = 'sj_jobs.json'
+        with open(file_write_jobs, 'a', encoding="utf-8") as add_file:
+            if os.stat(file_write_jobs).st_size == 0:
+                json.dump(objects["objects"], add_file, indent=4)
+                add_file.close()
+
+            else:
+                with open(file_write_jobs, encoding="utf-8") as json_file_read:
+                    content = json.load(json_file_read)
+                    json_file_read.close()
+                    for vacancy in objects["objects"]:
+                        content.append(vacancy)
+
+                with open(file_write_jobs, "w", encoding="utf-8") as json_file_write:
+                    json.dump(content, json_file_write, indent=4)
+                    json_file_write.close()
+
+            print(f"LOADING: 100 %")
 
     @staticmethod
     def add_vacancies(sorted_vacancies: list, top_vacancies: int):
@@ -69,7 +123,7 @@ class JSONSaver(Saver):
                 break
 
     @staticmethod
-    def get_vacancies_by_salary(salaty_from: int):
+    def get_vacancies_by_salary(salary_from: int):
 
         vacancies_sorted_by_salary = []
         try:
@@ -82,7 +136,7 @@ class JSONSaver(Saver):
         else:
 
             for vacancy in content:
-                if vacancy["items"]["salary_from"] >= salaty_from:
+                if vacancy["items"]["salary_from"] >= salary_from:
                     vacancies_sorted_by_salary.append(vacancy)
 
             with open("vacancies.json") as json_file_write:

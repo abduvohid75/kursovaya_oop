@@ -7,7 +7,8 @@ from classes_api import HeadHunterAPI, SuperJobAPI
 
 def get_sample_of_vacancies_list_hh_ru(search_query: str, keywords: str, top_vacancies: int):
     """
-    Получение информаций о вакансиях из сайта ХедХантер согласно заданным фильтрам
+    Получение информаций о вакансиях из сайта ХедХантер согласно заданным фильтрам из схоранненого json файла и
+    удаление промежуточного json файла
     """
     vacancies = []
     HeadHunterAPI().get_vacancies(search_query, keywords, top_vacancies)
@@ -72,7 +73,8 @@ def get_sample_of_vacancies_list_hh_ru(search_query: str, keywords: str, top_vac
 
 def get_sample_of_vacancies_list_sj_ru(search_query: str, keywords: str, top_vacancies: int):
     """
-       Получение информаций о вакансиях из сайта Суперджоб согласно заданным фильтрам
+       Получение информаций о вакансиях из сайта Суперджоб согласно заданным фильтрам из схоранненого json файла и
+       удаление промежуточного json файла
 
     """
 
